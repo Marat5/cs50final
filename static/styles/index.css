@@ -1,0 +1,22 @@
+.stream-card {
+    border: 0;
+    background-color: transparent;
+    color: var(--light-text);
+    transition: 200ms;
+}
+
+.stream-card .card-body {
+    padding: 0;
+}
+
+.stream-card .card-text {
+    color: var(--muted-text);
+}
+
+.stream-card .card-img-top {
+    border-radius: 3px;
+}
+
+.stream-card:hover {
+    transform: translate(8px, -8px);
+}

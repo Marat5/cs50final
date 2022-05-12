@@ -1,0 +1,84 @@
+.stream {
+    height: 600px;
+    background-color: var(--muted-text);
+}
+
+.stream-data__avatar {
+    width: 56px;
+    min-width: 56px;
+    height: 56px;
+    border-radius: 28px;
+    border: 3px solid var(--primary);
+    background-color: var(--muted-text);
+    margin-right: 6px;
+}
+
+.stream-data__name {
+    display: block;
+    font-weight: 600;
+    line-height: 20px;
+    color: var(--light-text);
+}
+
+.stream-data__description {
+    display: block;
+    font-weight: 600;
+    font-size: 13px;
+    line-height: 18px;
+    color: var(--light-text);
+}
+
+.stream-data__game {
+    display: block;
+    color: var(--primary);
+    font-size: 12px;
+}
+
+.chat {
+    border-left: 1px solid var(--border-base);
+    flex-direction: column;
+}
+
+.chat-header {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 50px;
+    min-height: 50px;
+    width: 100%;
+    border-bottom: 1px solid var(--border-base);
+    font-weight: 600;
+    color: var(--muted-text)
+}
+
+.chat-button {
+    font-size: 12px;
+    font-weight: 600;
+}
+
+.chat-points {
+    font-size: 12px;
+    color: var(--light-text);
+}
+
+.chat-messages {
+    display: flex;
+    flex-direction: column-reverse;
+    overflow: auto;
+}
+
+.chat-messages__empty-text {
+    color: var(--primary);
+    margin: auto;
+    font-size: 12px;
+}
+
+.chat-message__sender {
+    font-size: 12px;
+    color: var(--primary);
+}
+
+.chat-message__text {
+    font-size: 12px;
+    color: var(--light-text);
+}

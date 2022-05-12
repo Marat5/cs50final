@@ -7,10 +7,23 @@
     --light-text: #f8f9fa;
     --muted-text: #adadb8;
     --live: #eb0400;
+    --border-base: hsla(0,0%,100%,0.1);
+    --input-bg: #ffffff33;
 }
 
 html {
     overflow: hidden;
+}
+
+input[type="text"] {
+    border: 1px solid transparent;
+    background-color: var(--input-bg);
+}
+
+input[type="text"]:focus {
+    border: 1px solid var(--primary-active);
+    background-color: var(--bg-dark);
+    color: var(--light-text);
 }
 
 body {
@@ -190,4 +203,8 @@ a {
     height: 10px;
     border-radius: 5px;
     background-color: var(--live);
+}
+
+.channel-row__spectators {
+    color: var(--muted-text);
 }

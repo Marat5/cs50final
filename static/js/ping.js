@@ -3,7 +3,7 @@ const checkApiButton = document.querySelector("#check-api");
 const checkApi = () => {
     checkApiButton.innerHTML = `<span class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span>`;
 
-    fetch("http://127.0.0.1:5000/api/v1/ping")
+    fetch(`/api/v1/ping`)
         .then(res => {
             return res.json();
         })

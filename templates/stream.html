@@ -6,12 +6,15 @@
 
 {% block body %}
     <div class="row h-100">
-        <div class="col-sm-9 p-2">
-            <div class="stream">
-                Stream
-            </div>
-            <div class="stream-data d-flex align-items-center pt-3">
-                <div class="stream-data__avatar"></div>
+        <div class="col-lg-9 p-0">
+            <video class="stream" controls>
+                <source src='{{ url_for("static", filename="videos/twitch_clip_ninja.mp4") }}' type="video/mp4">
+                Your browser does not support the video tag.
+            </video>
+            <div class="stream-data d-flex align-items-center p-2 pt-3">
+                <div class="stream-data__bg-avatar">
+                    <img src='{{ url_for("static", filename="images/defaultAvatar.jpeg") }}' alt="Avatar" class="stream-data__avatar">
+                </div>
                 
                 <div>
                     <span class="stream-data__name">{{ stream["name"] }}</span>
@@ -21,7 +24,7 @@
             </div>
         </div>
 
-        <div class="col-sm-3 d-none d-md-flex overflow-scroll h-100 p-0 semi-dark-pannel chat">
+        <div class="col-lg-3 d-none d-lg-flex overflow-scroll p-0 semi-dark-pannel chat">
             <div class="chat-header">
                 <span>Stream Chat</span>
             </div>

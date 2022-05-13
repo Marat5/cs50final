@@ -1,9 +1,12 @@
 :root {
+    --app-height: 100vh;
+
     --bg-dark: #0e0e10;
     --bg-semi-dark: #18181b;
     --bg-semi-dark-hover: #26262c;
     --primary: #bf94ff;
     --primary-active: #9876cc;
+    --accent: #9147ff;
     --light-text: #f8f9fa;
     --muted-text: #adadb8;
     --live: #eb0400;
@@ -27,7 +30,7 @@ input[type="text"]:focus {
 }
 
 body {
-    height: 100vh;
+    height: var(--app-height);
     display: flex;
     flex-direction: column;
     background-color: var(--bg-dark);
@@ -45,6 +48,11 @@ a {
     text-decoration: none;
 }
 
+.h-100-mobilefixed {
+    height: 100%;
+    height: -webkit-fill-available;
+}
+
 .navbar-custom {
     box-shadow: 0 1px 2px rgba(0, 0, 0, 0.9), 0 0 2px rgba(0, 0, 0, 0.9);
     font-weight: 600;
@@ -52,6 +60,11 @@ a {
 
 .navbar-custom .nav-link:hover {
     color: var(--primary-active);
+}
+
+.navbar-toggler-icon-custom {
+    color: var(--light-text);
+    font-size:28px;
 }
 
 .dark-pannel {

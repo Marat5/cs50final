@@ -1,3 +1,6 @@
+// To check api we get data from all pages of /api/v1/ping and show the words that we receive from BE to user
+// The purpose of this code is to play around with js async generator
+
 const checkApiButton = document.querySelector("#check-api");
 
 async function* fetchWrodsFromPingPages() {
@@ -20,26 +23,15 @@ async function* fetchWrodsFromPingPages() {
     }
 }
 
-const setButtonSuccess = () => {
+const setButtonSuccess = (isSuccess) => {
     checkApiButton.classList.remove("btn-primary-custom");
-    checkApiButton.classList.add("btn-success");
+    checkApiButton.classList.add(`btn-${isSuccess ? 'success' : 'danger'}`);
     checkApiButton.setAttribute("disabled", true)
 
-    checkApiButton.textContent = "Api Is Fine";
+    checkApiButton.textContent = isSuccess ? "Api Is Fine" : "Api Is Not Fine";
 
     const statusWords = document.querySelector("#status-words");
-    statusWords.classList.add("text-success");
-}
-
-const setButtonError = () => {
-    checkApiButton.classList.remove("btn-primary-custom");
-    checkApiButton.classList.add("btn-danger");
-    checkApiButton.setAttribute("disabled", true)
-
-    checkApiButton.textContent = "Api Is Not Fine";
-
-    const statusWords = document.querySelector("#status-words");
-    statusWords.classList.add("text-danger");
+    statusWords.classList.add(`text-${isSuccess ? 'success' : 'danger'}`);
 }
 
 const addWordWhileLoading = (displayWord) => {
@@ -66,9 +58,9 @@ const checkApi = async () => {
         for await (const displayWord of fetchWrodsFromPingPages()) {
             addWordWhileLoading(displayWord);
         }
-        setButtonSuccess();
+        setButtonSuccess(true);
     } catch {
-        setButtonError();
+        setButtonSuccess(false);
     } finally {
         checkApiButton.removeEventListener("click", checkApi);
         setTimeout(() => {

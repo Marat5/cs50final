@@ -48,11 +48,6 @@ a {
     text-decoration: none;
 }
 
-.h-100-mobilefixed {
-    height: 100%;
-    height: -webkit-fill-available;
-}
-
 .navbar-custom {
     box-shadow: 0 1px 2px rgba(0, 0, 0, 0.9), 0 0 2px rgba(0, 0, 0, 0.9);
     font-weight: 600;

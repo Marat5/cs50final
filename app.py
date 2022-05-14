@@ -1,4 +1,4 @@
-from flask import Flask, render_template, jsonify, request
+from flask import Flask, render_template, jsonify, abort, request
 from data import stream_list, followed_channels, recommended_channels, messages
 from helpers import generate_chat_user_number, get_user_color
 from flask_socketio import SocketIO, join_room
@@ -10,6 +10,7 @@ socketio = SocketIO(app)
 
 # Session id is key, displayed number is value
 chat_users = {}
+ping_words = ["Async", "generator", "is", "fetching", "paginated", "data"]
 
 @app.route("/")
 def index():
@@ -17,11 +18,24 @@ def index():
 
 @app.route("/api/v1/ping")
 def ping():
+    page = request.args.get('page', 1, type=int)
+    if page > len(ping_words):
+        abort(404)
+    
+    displayWord = ping_words[page - 1]
+    
+    if len(ping_words) == page:
+        next = None
+    else:
+        next = page + 1
+
     ping_response = {
-        "isApiFine": True
+        "isApiFine": True,
+        "displayWord": displayWord,
+        "next": next
     }
     
-    time.sleep(1)
+    time.sleep(0.4)
     return jsonify(ping_response)
 
 @app.route("/check-api")
@@ -64,5 +78,5 @@ def handle_message(data):
 
 
 if __name__ == '__main__':
-    socketio.run(app, port=9000, host="192.168.18.87", debug=True)
-    # socketio.run(app, debug=True)
+    # socketio.run(app, port=9000, host="192.168.18.87", debug=True)
+    socketio.run(app, debug=True)

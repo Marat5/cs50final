@@ -1,0 +1,27 @@
+{% extends "layout.html" %}
+
+{% block head %}
+    <link href="/static/styles/start-streaming.css" rel="stylesheet">
+{% endblock %}
+
+{% block body %}
+    <div class="webcam-video-container">
+        <button id="startStream" type="button" class="btn btn-primary-custom">
+            Start Stream
+        </button>
+
+        <button id="endStream" type="button" class="btn d-none btn-primary-custom">
+            End Stream
+        </button>
+
+        <video id="webcamVideo" class="webcam-video" autoplay>
+            Your browser does not support the video tag.
+        </video>
+    </div>
+
+    <script async src="https://docs.opencv.org/master/opencv.js" type="text/javascript"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/4.0.1/socket.io.js" integrity="sha512-q/dWJ3kcmjBLU4Qc47E4A9kTB4m3wuTY7vkFJDTZKjTs8jhyGQnaUrxa0Ytd0ssMZhbNua9hE+E7Qv1j+DyZwA==" crossorigin="anonymous"></script>
+    <script src="/static/js/broadcast-sockets.js"></script>
+    
+    
+{% endblock %}

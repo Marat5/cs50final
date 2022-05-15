@@ -7,8 +7,7 @@
 {% block body %}
     <div class="row h-100">
         <div class="col-lg-9 p-0">
-            <video class="stream" controls>
-                <source src='{{ url_for("static", filename="videos/twitch_clip_ninja.mp4") }}' type="video/mp4">
+            <video id="stream" class="stream" autoplay muted controls>
                 Your browser does not support the video tag.
             </video>
             <div class="stream-data d-flex align-items-center p-2 pt-3">
@@ -57,5 +56,6 @@
 
     <script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/4.0.1/socket.io.js" integrity="sha512-q/dWJ3kcmjBLU4Qc47E4A9kTB4m3wuTY7vkFJDTZKjTs8jhyGQnaUrxa0Ytd0ssMZhbNua9hE+E7Qv1j+DyZwA==" crossorigin="anonymous"></script>
     <script src="/static/js/chat.js"></script>
+    <script src="/static/js/watch-sockets.js"></script>
     
 {% endblock %}

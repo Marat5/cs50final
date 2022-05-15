@@ -1,5 +1,5 @@
 from flask import Flask, render_template, jsonify, abort, request
-from data import stream_list, followed_channels, recommended_channels, messages
+from data import stream_list, followed_channels, recommended_channels
 from helpers import generate_chat_user_number, get_user_color
 from flask_socketio import SocketIO, join_room
 import time
@@ -54,6 +54,10 @@ def stream(stream_id):
         messages=stream["messages"][::-1]
     )
 
+@app.route("/start-streaming")
+def startStreaming():
+    return render_template("start-streaming.html", followed_channels=followed_channels, recommended_channels=recommended_channels)
+
 @socketio.on('join')
 def on_join(data):
     join_room(data["stream_id"])
@@ -75,6 +79,10 @@ def handle_message(data):
 
     stream["messages"].append(new_message)
     socketio.emit("new message", new_message, room=data["stream_id"])
+
+@socketio.on("chunkOfStream")
+def handle_chunk_of_stream(chunk):
+    socketio.emit("chunkOfStream", chunk, broadcast=True)
 
 
 if __name__ == '__main__':

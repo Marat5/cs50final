@@ -33,7 +33,7 @@ socket.on('new message', function (e) {
 
     const emptyMessagesText = document.querySelector("#noMessagesText");
     emptyMessagesText?.remove();
-})
+});
 
 document.querySelector('#newMessageForm').onsubmit = e => {
     e.preventDefault();
@@ -42,4 +42,4 @@ document.querySelector('#newMessageForm').onsubmit = e => {
     const textField = document.querySelector('#newMessageInput');
     socket.emit("message", { text: textField.value, stream_id: streamId });
     textField.value = '';
-  };
+};

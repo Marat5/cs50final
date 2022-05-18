@@ -36,6 +36,10 @@ body {
     background-color: var(--bg-dark);
 }
 
+video {
+    aspect-ratio: 16 / 9;
+}
+
 .preload * {
     -webkit-transition: none !important;
     -moz-transition: none !important;
@@ -53,7 +57,8 @@ a {
     font-weight: 600;
 }
 
-.navbar-custom .nav-link:hover {
+.navbar-custom .nav-link:hover,
+.navbar-custom .nav-link:focus {
     color: var(--primary-active);
 }
 
@@ -75,6 +80,10 @@ a {
 .dark-pannel a,
 .dark-pannel h1 {
     color: var(--light-text);
+}
+
+.sidebar {
+    border-right: 1px solid var(--border-base);
 }
 
 .btn-primary-custom {
@@ -215,4 +224,14 @@ a {
 
 .channel-row__spectators {
     color: var(--muted-text);
+}
+
+.view-count-outer {
+    color: var(--light-text);
+    display: flex;
+    align-items: center;
+}
+
+.view-count-outer i {
+    margin-right: 4px;
 }

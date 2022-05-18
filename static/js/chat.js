@@ -1,4 +1,5 @@
-const socket = io();
+// Should be imported after socket is in global scope
+
 const messagesContainer = document.querySelector("#chat-messages");
 
 socket.on('connect', function() {
@@ -9,27 +10,30 @@ socket.on('connect', function() {
 });
 
 socket.on('new message', function (e) {
-    const msg = document.createElement('div');
-    msg.classList.add('chat-message');
+    const msgElem = document.createElement('div');
+    msgElem.classList.add(`chat-message`);
+    if (e.isFromStreamer) {
+        msgElem.classList.add('message-from-streamer');
+    }
 
     const msgSenderElem = document.createElement('span');
     const msgSenderText = document.createTextNode(`${e.sender}:`);
     msgSenderElem.style.color = e.sender_color;
     msgSenderElem.classList.add('chat-message__sender');
     msgSenderElem.appendChild(msgSenderText);
-    msg.appendChild(msgSenderElem);
+    msgElem.appendChild(msgSenderElem);
 
-    msg.append(document.createTextNode("\n"));
+    msgElem.append(document.createTextNode("\n"));
 
     const msgTextElem = document.createElement('span');
     const msgText = document.createTextNode(e.text);
     msgTextElem.classList.add('chat-message__text');
     msgTextElem.appendChild(msgText);
-    msg.appendChild(msgTextElem);
+    msgElem.appendChild(msgTextElem);
 
     // Prepend instead of appending because chat has reversed column flex direction
     // To show latest messages on load (instead of scrolling down with js)
-    messagesContainer.prepend(msg)
+    messagesContainer.prepend(msgElem)
 
     const emptyMessagesText = document.querySelector("#noMessagesText");
     emptyMessagesText?.remove();

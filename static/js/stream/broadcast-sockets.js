@@ -2,7 +2,7 @@ const socket = io();
 
 const webcamVideo = document.querySelector("#webcamVideo");
 
-const startSreamingBtn = document.querySelector("#startStream");
+const startSreamBtn = document.querySelector("#startStream");
 const endStreamBtn = document.querySelector("#endStream");
 
 let stream;
@@ -17,7 +17,7 @@ const startStream = async () => {
         recorder = new MediaRecorder(stream, {mimeType: 'video/webm; codecs="vp8"', videoBitsPerSecond: 10000000});
         webcamVideo.srcObject = stream;
 
-        startSreamingBtn.classList.add("d-none");
+        startSreamBtn.classList.add("d-none");
         endStreamBtn.classList.remove("d-none");
 
         recorder.start(100);
@@ -39,10 +39,10 @@ const endStream = () => {
 
     webcamVideo.srcObject = null;
 
-    startSreamingBtn.classList.remove("d-none");
+    startSreamBtn.classList.remove("d-none");
     endStreamBtn.classList.add("d-none");
 }
 
 
-startSreamingBtn.addEventListener("click", startStream);
+startSreamBtn.addEventListener("click", startStream);
 endStreamBtn.addEventListener("click", endStream);

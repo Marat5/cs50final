@@ -1,3 +1,5 @@
+const socket = io();
+
 const streamElem = document.querySelector('#stream');
 
 const mediaSource = new MediaSource;
@@ -7,9 +9,8 @@ streamElem.src = URL.createObjectURL(mediaSource);
 
 mediaSource.addEventListener("sourceopen", () => {
     mediaBuffer = mediaSource.addSourceBuffer('video/webm; codecs="vp8"');
-
 }, false);
 
-socket.on('chunkOfStream', (e) => {
-    mediaBuffer.appendBuffer(e);
+socket.on('chunkOfStream', (buffer) => {
+    mediaBuffer.appendBuffer(buffer);
 });

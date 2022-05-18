@@ -1,0 +1,47 @@
+{% extends "layout.html" %}
+
+{% block head %}
+    <link href="/static/styles/stream.css" rel="stylesheet">
+    <link href="/static/styles/chat.css" rel="stylesheet">
+{% endblock %}
+
+{% block body %}
+    <div class="row h-100">
+        <div class="col-lg-9 p-0">
+            <video id="stream" class="stream" autoplay muted controls>
+                Your browser does not support the video tag.
+            </video>
+
+            {% if not stream["isLive"] %}
+                <span id="stream-not-live" class="stream-not-live p-2 d-block">This stream is NOT live now, but you can chat</span>
+            {% else %}
+                <span id="stream-not-live" class="stream-not-live p-2 d-none">This stream is NOT live now</span>
+            {% endif %}
+            <div class="stream-data d-flex align-items-center p-2 pt-3">
+                <div class="stream-data__bg-avatar">
+                    <img src='{{ url_for("static", filename="images/defaultAvatar.jpeg") }}' alt="Avatar" class="stream-data__avatar">
+                </div>
+                
+                <div>
+                    <span class="stream-data__name">{{ stream["name"] }}</span>
+                    <span class="stream-data__description">{{ stream["description"] }}</span>
+                    <span class="stream-data__game">{{ stream["game"] }}</span>
+                </div>
+
+                <div class="view-count-outer ms-auto me-3">
+                    <i class="fa-regular fa-eye"></i>
+                    <span id="viewsCount">0</span>
+                </div>
+            </div>
+        </div>
+
+        {% include "chat.html" %}
+    </div>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/4.0.1/socket.io.js" integrity="sha512-q/dWJ3kcmjBLU4Qc47E4A9kTB4m3wuTY7vkFJDTZKjTs8jhyGQnaUrxa0Ytd0ssMZhbNua9hE+E7Qv1j+DyZwA==" crossorigin="anonymous"></script>
+    <!-- <script src='{{ url_for("static", filename="js/stream/watch-sockets.js") }}'></script> -->
+    <script src='{{ url_for("static", filename="js/stream/watch-webrtc.js") }}'></script>
+    
+    <script src='{{ url_for("static", filename="js/chat.js") }}'></script>
+
+{% endblock %}

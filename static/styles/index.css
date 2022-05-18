@@ -5,6 +5,15 @@
     transition: 200ms;
 }
 
+.stream-card.unactive img {
+    -webkit-filter: grayscale(100%);
+    filter: grayscale(100%);
+}
+
+.stream-card.unactive span {
+    color: var(--muted-text);
+}
+
 .stream-card .card-body {
     padding: 0;
 }

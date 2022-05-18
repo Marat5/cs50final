@@ -1,0 +1,29 @@
+<div class="col-lg-3 d-none d-lg-flex overflow-scroll p-0 semi-dark-pannel chat">
+    <div class="chat-header">
+        <span>Stream Chat</span>
+    </div>
+
+    <div id="chat-messages" class="chat-messages p-2">
+        {% if messages|length == 0 %}
+            <span id="noMessagesText" class="chat-messages__empty-text">You can start to chat!</span>
+        {% endif %}
+
+        {% for message in messages %}
+            <div class="chat-message {{ 'message-from-streamer' if message['isFromStreamer'] }}">
+                <span style='color: {{ message["sender_color"] }}' class="chat-message__sender">{{ message["sender"] }}:</span>
+                <span class="chat-message__text">{{ message["text"] }}</span>
+            </div>
+        {% endfor %}
+    </div>
+
+    <form id="newMessageForm" class="chat-form m-2 mt-auto mb-3">
+        <input type="text" class="form-control" placeholder="Send a message" id="newMessageInput" aria-describedby="New chat message" autocomplete="off">
+
+        <div class="d-flex justify-content-space-between align-items-center">
+            <span class="chat-points ps-2">470 points</span>
+            <button id="send-message" type="submit" class="btn btn-primary-custom d-block ms-auto mt-2 chat-button p-1" disabled>
+                Chat
+            </button>
+        </div>
+    </form>
+</div>

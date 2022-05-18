@@ -3,11 +3,25 @@
     align-items: center;
     justify-content: center;
     flex-direction: column;
-    padding-top: 20px;
+    align-self: flex-start;
 }
 
 .webcam-video {
-    margin-top: 12px;
+    margin-bottom: 12px;
     width: 100%;
-    max-height: 700px;
+    max-height: 900px;
+    background-color: var(--bg-semi-dark);
+}
+
+.already-live {
+    display: block;
+    text-align: center;
+    color: var(--live);
+    margin-bottom: 12px;
+}
+
+.stream-controls {
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
 }

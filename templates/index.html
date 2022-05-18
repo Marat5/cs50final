@@ -12,18 +12,31 @@
         <div class="row">
             {% for stream in streams %}
                 <div class="col-md-3 d-flex justify-content-center mb-3">
-                    <div class="card stream-card">
-                        {% if stream["img"] %}
-                            <img src='{{ stream["img"] }}' class="card-img-top" alt="Stream picture">
-                        {% else %}
-                            <img src="/static/images/defaultStreamBG.jpeg" class="card-img-top" alt="Stream picture">
-                        {% endif %}
-                        <div class="card-body">
-                            <a href='/stream/{{ stream["id"] }}' class="stretched-link d-inline-block pt-1">{{ stream["name"] }}</a>
-                            <p class="card-text">{{ stream["description"] }}</p>
-                            
+                    {% if stream["isLive"] %}
+                        <div class="card stream-card">
+                            {% if stream["img"] %}
+                                <img src='{{ stream["img"] }}' class="card-img-top" alt="Stream picture">
+                            {% else %}
+                                <img src="/static/images/defaultStreamBG.jpeg" class="card-img-top" alt="Stream picture">
+                            {% endif %}
+                            <div class="card-body">
+                                <a href='/stream/{{ stream["id"] }}' class="stretched-link d-inline-block pt-1">{{ stream["name"] }}</a>
+                                <p class="card-text">{{ stream["description"] }}</p>
+                            </div>
                         </div>
-                    </div>
+                    {% else %}
+                        <div class="card stream-card unactive">
+                            {% if stream["img"] %}
+                                <img src='{{ stream["img"] }}' class="card-img-top" alt="Stream picture">
+                            {% else %}
+                                <img src="/static/images/defaultStreamBG.jpeg" class="card-img-top" alt="Stream picture">
+                            {% endif %}
+                            <div class="card-body">
+                                <a href='/stream/{{ stream["id"] }}' class="stretched-link d-inline-block pt-1">{{ stream["name"] }}</a>
+                                <p class="card-text">{{ stream["description"] }}</p>
+                            </div>
+                        </div>
+                    {% endif %}
                 </div>
             {% endfor %}
         </div>

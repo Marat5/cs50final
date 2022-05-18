@@ -6,6 +6,9 @@ stream_list = [
         "img": None,
         "game": "Fortnite",
         "messages": [], # Each message should be a dict with sender, text, sender_color and stream_id
+        "isLive": False,
+        "broadcasterId": None,
+        "viewers": 0,
     },
     {
         "id": 2,
@@ -14,6 +17,9 @@ stream_list = [
         "img": None,
         "game": "Fortnite",
         "messages": [],
+        "isLive": False,
+        "broadcasterId": None,
+        "viewers": 0,
     },
     {
         "id": 3,
@@ -22,6 +28,9 @@ stream_list = [
         "img": None,
         "game": "Fortnite",
         "messages": [],
+        "isLive": False,
+        "broadcasterId": None,
+        "viewers": 0,
     },
     {
         "id": 4,
@@ -30,6 +39,9 @@ stream_list = [
         "img": None,
         "game": "Fortnite",
         "messages": [],
+        "isLive": False,
+        "broadcasterId": None,
+        "viewers": 0,
     },
     {
         "id": 5,
@@ -38,6 +50,9 @@ stream_list = [
         "img": None,
         "game": "Fortnite",
         "messages": [],
+        "isLive": False,
+        "broadcasterId": None,
+        "viewers": 0,
     },
     {
         "id": 6,
@@ -46,6 +61,9 @@ stream_list = [
         "img": None,
         "game": "Fortnite",
         "messages": [],
+        "isLive": False,
+        "broadcasterId": None,
+        "viewers": 0,
     },
     {
         "id": 7,
@@ -54,6 +72,9 @@ stream_list = [
         "img": None,
         "game": "Fortnite",
         "messages": [],
+        "isLive": False,
+        "broadcasterId": None,
+        "viewers": 0,
     },
 ]
 

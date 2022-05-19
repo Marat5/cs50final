@@ -1,5 +1,3 @@
-const socket = io();
-
 const webcamVideo = document.querySelector("#webcamVideo");
 
 const startSreamBtn = document.querySelector("#startStream");

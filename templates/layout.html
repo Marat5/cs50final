@@ -18,75 +18,77 @@
     </head>
     <body class="preload">
         <nav class="navbar navbar-expand-lg semi-dark-pannel navbar-custom">
-            <div class="container-fluid">
-              <a class="navbar-brand animated-logo" href="/">
-                <i class="fa-solid fa-message outer-icon"></i>
-                <i class="fa-solid fa-message inner-icon"></i>
-                <div style="left: 10px;" class="blinking-eye"></div>
-                <div style="left: 16px;" class="blinking-eye"></div>
-              </a>
-              <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
-                <span class="navbar-toggler-icon">   
-                  <i class="fas fa-bars navbar-toggler-icon-custom"></i>
-                </span>
-              </button>
-              <div class="collapse navbar-collapse" id="navbarNav">
-                <ul class="navbar-nav">
-                  <li class="nav-item">
-                    <a class="nav-link" aria-current="page" href="/">Watch</a>
-                  </li>
-                  <li class="nav-item">
-                    <!-- The streamer lands at the page of stream 1. If he wants to stream on different channel, has to change the number in url -->
-                    <!-- This is because streams are not dynamic and they are hardcoded to always occupy space on landing page -->
-                    <a class="nav-link" href="/start-streaming/1">Start a Stream</a>
-                  </li>
-                </ul>
-              </div>
-            </div>
-          </nav>
-
-          <div class="container-fluid h-100 overflow-hidden">
-            <div class="row h-100">
-              <div class="col p-0 d-none d-lg-block overflow-scroll h-100 semi-dark-pannel sidebar">
-                <span class="sidebar-heading">Followed Channels</span>
-        
-                {% for channel in followed_channels %}
-                    <a href="#" class="p-2 channel-row">
-                        <img src='{{ url_for("static", filename="images/defaultAvatar.jpeg") }}' class="channel-row__avatar" alt="Streamer avatar">
-                        <div>
-                            <span class="channel-row__name">{{ channel["name"] }}</span>
-                            <div class="channel-row__game">Fortnite</div>
-                        </div>
-    
-                        <div class="live-circle ms-auto me-1"></div>
-                        <span class="channel-row__spectators">1.1K</span>
-                    </a>
-                {% endfor %}
-    
-                <span class="sidebar-heading">Recommended Channels</span>
-        
-                {% for channel in recommended_channels %}
-                    <a href="#" class="p-2 channel-row">
-                        <img src='{{ url_for("static", filename="images/defaultAvatar.jpeg") }}' class="channel-row__avatar" alt="Streamer avatar">
-    
-                        <div class="channel-row__maininfo">
-                            <span class="channel-row__name">{{ channel["name"] }}</span>
-                            <div class="channel-row__game">Fortnite</div>
-                        </div>
-                        
-                        <div class="live-circle ms-auto me-1"></div>
-                        <span class="channel-row__spectators">1.1K</span>
-                    </a>
-                {% endfor %}
-              </div>
-
-              <main class="col-sm-12 col-lg-10 overflow-scroll h-100 dark-pannel">
-                {% block body %}{% endblock %}
-              </main>
-
+          <div class="container-fluid">
+            <a class="navbar-brand animated-logo" href="/">
+              <i class="fa-solid fa-message outer-icon"></i>
+              <i class="fa-solid fa-message inner-icon"></i>
+              <div style="left: 10px;" class="blinking-eye"></div>
+              <div style="left: 16px;" class="blinking-eye"></div>
+            </a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+              <span class="navbar-toggler-icon">   
+                <i class="fas fa-bars navbar-toggler-icon-custom"></i>
+              </span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+              <ul class="navbar-nav">
+                <li class="nav-item">
+                  <a class="nav-link" aria-current="page" href="/">Watch</a>
+                </li>
+                <li class="nav-item">
+                  <!-- The streamer lands at the page of stream 1. If he wants to stream on different channel, has to change the number in url -->
+                  <!-- This is because streams are not dynamic and they are hardcoded to always occupy space on landing page -->
+                  <a class="nav-link" href="/start-streaming/1">Start a Stream</a>
+                </li>
+              </ul>
             </div>
           </div>
+        </nav>
 
+        <div class="container-fluid h-100 overflow-hidden">
+          <div class="row h-100">
+            <div class="col p-0 d-none d-lg-block overflow-scroll h-100 semi-dark-pannel sidebar">
+              <span class="sidebar-heading">Followed Channels</span>
+      
+              {% for stream in streams_from_followed_channels %}
+                  <a href='/stream/{{ stream["id"] }}' class="p-2 channel-row">
+                      <img src='{{ url_for("static", filename="images/defaultAvatar.jpeg") }}' class="channel-row__avatar" alt="Streamer avatar">
+                      <div>
+                          <span class="channel-row__name">{{ stream["channelName"] }}</span>
+                          <div class="channel-row__game">Fortnite</div>
+                      </div>
+  
+                      <div id="liveCircle-{{ stream['id'] }}" class="live-circle ms-auto me-1  {{ 'inactive' if not stream['isLive'] }}"></div>
+                      <span id="viewerCount-{{ stream['id'] }}" class="channel-row__spectators">{{ stream["viewers"] }}</span>
+                  </a>
+              {% endfor %}
+  
+              <span class="sidebar-heading">Recommended Channels</span>
+      
+              {% for stream in recommended_streams %}
+                  <a href='/stream/{{ stream["id"] }}' class="p-2 channel-row">
+                      <img src='{{ url_for("static", filename="images/defaultAvatar.jpeg") }}' class="channel-row__avatar" alt="Streamer avatar">
+  
+                      <div class="channel-row__maininfo">
+                          <span class="channel-row__name">{{ stream["channelName"] }}</span>
+                          <div class="channel-row__game">Fortnite</div>
+                      </div>
+                      
+                      <div id="liveCircle-{{ stream['id'] }}" class="live-circle ms-auto me-1 {{ 'inactive' if not stream['isLive'] }}"></div>
+                      <span id="viewerCount-{{ stream['id'] }}" class="channel-row__spectators">{{ stream["viewers"] }}</span>
+                  </a>
+              {% endfor %}
+            </div>
+
+            <main class="col-sm-12 col-lg-10 overflow-scroll h-100 dark-pannel">
+              {% block body %}{% endblock %}
+            </main>
+
+          </div>
+        </div>
+
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/4.0.1/socket.io.js" integrity="sha512-q/dWJ3kcmjBLU4Qc47E4A9kTB4m3wuTY7vkFJDTZKjTs8jhyGQnaUrxa0Ytd0ssMZhbNua9hE+E7Qv1j+DyZwA==" crossorigin="anonymous"></script>
         <script src="/static/js/onLoad.js"></script>
+        {% block scripts %}{% endblock %}
     </body>
 </html>

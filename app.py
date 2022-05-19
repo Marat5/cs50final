@@ -1,5 +1,5 @@
 from flask import Flask, render_template, jsonify, abort, request
-from data import stream_list, followed_channels, recommended_channels
+from data import stream_list, streams_from_followed_channels, recommended_streams
 from helpers import generate_chat_user_number, get_user_color, get_stream_by_id, get_broadcaster_id_list, get_stream_by_broadcaster_id
 from flask_socketio import SocketIO, join_room, emit
 import time
@@ -14,7 +14,12 @@ ping_words = ["Async", "generator", "is", "fetching", "paginated", "data"]
 
 @app.route("/")
 def index():
-    return render_template("index.html", streams=stream_list, followed_channels=followed_channels, recommended_channels=recommended_channels)
+    return render_template(
+            "main-page.html",
+            streams=stream_list,
+            streams_from_followed_channels=streams_from_followed_channels,
+            recommended_streams=recommended_streams
+        )
 
 @app.route("/api/v1/ping")
 def ping():
@@ -39,8 +44,8 @@ def ping():
     return jsonify(ping_response)
 
 @app.route("/check-api")
-def checkApi():
-    return render_template("check.html", followed_channels=followed_channels, recommended_channels=recommended_channels)
+def checkApi():    
+    return render_template("check.html", streams_from_followed_channels=streams_from_followed_channels, recommended_streams=recommended_streams)
 
 @app.route("/stream/<stream_id>")
 def stream(stream_id):
@@ -48,8 +53,8 @@ def stream(stream_id):
 
     return render_template(
         "watch-stream.html",
-        followed_channels=followed_channels,
-        recommended_channels=recommended_channels,
+        streams_from_followed_channels=streams_from_followed_channels,
+        recommended_streams=recommended_streams,
         stream=stream,
         messages=stream["messages"][::-1]
     )
@@ -60,10 +65,12 @@ def start_streaming(stream_id):
 
     return render_template(
         "start-streaming.html",
-        followed_channels=followed_channels,
-        recommended_channels=recommended_channels,
+        streams=stream_list,
+        streams_from_followed_channels=streams_from_followed_channels,
+        recommended_streams=recommended_streams,
         messages=stream["messages"][::-1],
-        is_live=stream["isLive"]
+        is_live=stream["isLive"],
+        channel_name=stream["channelName"]
     )
 
 @socketio.on('join')
@@ -76,7 +83,7 @@ def handle_message(data):
 
     if request.sid == stream["broadcasterId"]:
             new_message = {
-                "sender": "Streamer",
+                "sender": stream["channelName"],
                 "text": data["text"],
                 "sender_color": "#9147ff",
                 "stream_id": data["stream_id"],
@@ -108,13 +115,20 @@ def handle_message(data):
 
 # Used for webRTC stream implementation (depends on join room from chat part)
 
+def handle_end_stream(stream):
+    stream["broadcasterId"] = None
+    stream["isLive"] = False
+    stream["viewers"] = 0
+
+    emit("endStream", stream["id"], broadcast=True)
+
 @socketio.on("broadcaster")
 def connect_broadcaster(stream_id):
     stream = get_stream_by_id(stream_id)
 
     stream["isLive"] = True
     stream["broadcasterId"] = request.sid
-    emit("broadcaster", to=stream_id)
+    emit("broadcaster", stream_id, broadcast=True)
 
 @socketio.on("watcher")
 def connect_watcher(stream_id):
@@ -129,10 +143,7 @@ def disconnect():
     # Broadcaster is disconnected
     if request.sid in broadcaster_ids:
         stream = get_stream_by_broadcaster_id(request.sid)
-
-        stream["broadcasterId"] = None
-        stream["isLive"] = False
-        emit("endStream", to=stream["id"])
+        handle_end_stream(stream)
     # Peer is disconnected
     else:
         # Emit disconnectPeer to all broadcasters as we don't know streamId that he was connected to
@@ -155,10 +166,7 @@ def candidate(id, message):
 @socketio.on("endStream")
 def end_stream(stream_id):
     stream = get_stream_by_id(stream_id)
-
-    stream["broadcasterId"] = None
-    stream["isLive"] = False
-    emit("endStream", to=stream_id)
+    handle_end_stream(stream)
 
 # We use the special event emited by broadcaster for view count
 # Because we don't always know what stream the peer disconnected from
@@ -166,9 +174,9 @@ def end_stream(stream_id):
 @socketio.on("viewCount")
 def set_view_count(stream_id, view_count):
     stream = get_stream_by_id(stream_id)
-    stream["views"] = view_count
+    stream["viewers"] = view_count
 
-    emit("viewCount", view_count, to=stream["id"], include_self=False)
+    emit("viewCount", (stream_id, view_count), broadcast=True)
 
 # End of webRTC stream implementation
 

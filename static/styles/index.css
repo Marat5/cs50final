@@ -5,12 +5,12 @@
     transition: 200ms;
 }
 
-.stream-card.unactive img {
+.stream-card.inactive img {
     -webkit-filter: grayscale(100%);
     filter: grayscale(100%);
 }
 
-.stream-card.unactive span {
+.stream-card.inactive span {
     color: var(--muted-text);
 }
 

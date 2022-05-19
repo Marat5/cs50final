@@ -1,5 +1,3 @@
-const socket = io();
-
 const config = {
   iceServers: [
     {
@@ -47,20 +45,33 @@ socket.on("connect", () => {
     socket.emit("watcher", streamId);
 });
 
-socket.on("broadcaster", () => {
+socket.on("broadcaster", (broadcasterStreamId) => {
+    if (broadcasterStreamId !== streamId) {
+        return;
+    }
+
     streamNotLiveElem.classList.add("d-none");
     streamNotLiveElem.classList.remove("d-block");
 
     socket.emit("watcher", streamId);
 });
 
-socket.on("viewCount", (newCount) => {
+socket.on("viewCount", (newCountStreamId, newCount) => {
+    if (newCountStreamId !== streamId) {
+        return;
+    }
+
     viewsCountElem.textContent = newCount;
 });
 
-socket.on("endStream", () => {
+socket.on("endStream", (broadcasterStreamId) => {
+    if (broadcasterStreamId !== streamId) {
+        return;
+    }
+
     streamElem.srcObject = null;
 
+    viewsCountElem.textContent = 0;
     streamNotLiveElem.classList.remove("d-none");
     streamNotLiveElem.classList.add("d-block");
 });

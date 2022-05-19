@@ -1,7 +1,5 @@
 // In this file we handle communication with webrtc signaling server
 // And UI changes related to stream broadcasting
-const socket = io();
-
 const rtcPeerConnectionConfig = {
     iceServers: [{ urls: ["stun:stun.l.google.com:19302"] }]
 };

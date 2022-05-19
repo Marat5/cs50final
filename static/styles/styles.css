@@ -222,6 +222,10 @@ a {
     background-color: var(--live);
 }
 
+.live-circle.inactive {
+    background-color: var(--muted-text);
+}
+
 .channel-row__spectators {
     color: var(--muted-text);
 }

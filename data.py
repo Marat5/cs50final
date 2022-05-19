@@ -9,6 +9,9 @@ stream_list = [
         "isLive": False,
         "broadcasterId": None,
         "viewers": 0,
+        "channelName": "Ninja",
+        "isRecommended": False,
+        "isFollowed": True,
     },
     {
         "id": 2,
@@ -20,6 +23,9 @@ stream_list = [
         "isLive": False,
         "broadcasterId": None,
         "viewers": 0,
+        "channelName": "Loeya",
+        "isRecommended": False,
+        "isFollowed": True,
     },
     {
         "id": 3,
@@ -31,6 +37,9 @@ stream_list = [
         "isLive": False,
         "broadcasterId": None,
         "viewers": 0,
+        "channelName": "Nick Eh 30",
+        "isRecommended": False,
+        "isFollowed": True,
     },
     {
         "id": 4,
@@ -42,6 +51,9 @@ stream_list = [
         "isLive": False,
         "broadcasterId": None,
         "viewers": 0,
+        "channelName": "Bugha",
+        "isRecommended": False,
+        "isFollowed": True,
     },
     {
         "id": 5,
@@ -53,6 +65,9 @@ stream_list = [
         "isLive": False,
         "broadcasterId": None,
         "viewers": 0,
+        "channelName": "dubz",
+        "isRecommended": True,
+        "isFollowed": False,
     },
     {
         "id": 6,
@@ -64,6 +79,9 @@ stream_list = [
         "isLive": False,
         "broadcasterId": None,
         "viewers": 0,
+        "channelName": "Jeff Bezos",
+        "isRecommended": True,
+        "isFollowed": False,
     },
     {
         "id": 7,
@@ -75,58 +93,12 @@ stream_list = [
         "isLive": False,
         "broadcasterId": None,
         "viewers": 0,
+        "channelName": "Last Streamer",
+        "isRecommended": True,
+        "isFollowed": False,
     },
 ]
 
-followed_channels = [
-    {
-        "name": "This channel"
-    },
-    {
-        "name": "That Channel"
-    },    
-    {
-        "name": "Ninja"
-    },
-]
+recommended_streams = list(filter(lambda x: x["isRecommended"], stream_list))
 
-recommended_channels = [
-    {
-        "name": "Jeff Bezos"
-    },
-    {
-        "name": "Another recommended channel here"
-    },    
-    {
-        "name": "Loeya"
-    },
-    {
-        "name": "Nick Eh 30"
-    },
-    {
-        "name": "Bugha"
-    }
-]
-
-messages = [
-    {
-        "sender": "Anonymus",
-        "text": "Hey, whatsup"
-    },
-    {
-        "sender": "Anonymus",
-        "text": "Hey, whatsup, bro. How you doin"
-    },
-    {
-        "sender": "Anonymus",
-        "text": "Dude, this stream is amazing"
-    },
-    {
-        "sender": "Anonymus",
-        "text": "Come on, guys. Everyone knows that I can write a longer message than you. It is going to be so much longer that you will never actually take your time to even read it. See ya, cheers!"
-    },
-    {
-        "sender": "Anonymus",
-        "text": "How this works?"
-    },
-]
+streams_from_followed_channels = list(filter(lambda x: x["isFollowed"], stream_list))

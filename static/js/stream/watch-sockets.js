@@ -1,5 +1,3 @@
-const socket = io();
-
 const streamElem = document.querySelector('#stream');
 
 const mediaSource = new MediaSource;

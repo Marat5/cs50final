@@ -12,8 +12,7 @@
         <div class="row">
             {% for stream in streams %}
                 <div class="col-md-3 d-flex justify-content-center mb-3">
-                    {% if stream["isLive"] %}
-                        <div class="card stream-card">
+                        <div id="streamCard-{{ stream['id'] }}" class="card stream-card {{ 'inactive' if not stream['isLive'] }}">
                             {% if stream["img"] %}
                                 <img src='{{ stream["img"] }}' class="card-img-top" alt="Stream picture">
                             {% else %}
@@ -24,22 +23,13 @@
                                 <p class="card-text">{{ stream["description"] }}</p>
                             </div>
                         </div>
-                    {% else %}
-                        <div class="card stream-card unactive">
-                            {% if stream["img"] %}
-                                <img src='{{ stream["img"] }}' class="card-img-top" alt="Stream picture">
-                            {% else %}
-                                <img src="/static/images/defaultStreamBG.jpeg" class="card-img-top" alt="Stream picture">
-                            {% endif %}
-                            <div class="card-body">
-                                <a href='/stream/{{ stream["id"] }}' class="stretched-link d-inline-block pt-1">{{ stream["name"] }}</a>
-                                <p class="card-text">{{ stream["description"] }}</p>
-                            </div>
-                        </div>
-                    {% endif %}
                 </div>
             {% endfor %}
         </div>
     </div>
 
+{% endblock %}
+
+{% block scripts %}
+    <script src="/static/js/mainPage.js"></script>
 {% endblock %}

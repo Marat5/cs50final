@@ -30,18 +30,18 @@
 
                 <div class="view-count-outer ms-auto me-3">
                     <i class="fa-regular fa-eye"></i>
-                    <span id="viewsCount">0</span>
+                    <span id="viewsCount">{{ stream["viewers"] }}</span>
                 </div>
             </div>
         </div>
 
         {% include "chat.html" %}
     </div>
+{% endblock %}
 
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/4.0.1/socket.io.js" integrity="sha512-q/dWJ3kcmjBLU4Qc47E4A9kTB4m3wuTY7vkFJDTZKjTs8jhyGQnaUrxa0Ytd0ssMZhbNua9hE+E7Qv1j+DyZwA==" crossorigin="anonymous"></script>
+{% block scripts %}
     <!-- <script src='{{ url_for("static", filename="js/stream/watch-sockets.js") }}'></script> -->
     <script src='{{ url_for("static", filename="js/stream/watch-webrtc.js") }}'></script>
-    
-    <script src='{{ url_for("static", filename="js/chat.js") }}'></script>
 
+    <script src='{{ url_for("static", filename="js/chat.js") }}'></script>
 {% endblock %}

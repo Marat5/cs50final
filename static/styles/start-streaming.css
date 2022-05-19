@@ -13,15 +13,42 @@
     background-color: var(--bg-semi-dark);
 }
 
+.alerady-live-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
 .already-live {
-    display: block;
-    text-align: center;
     color: var(--live);
-    margin-bottom: 12px;
+    margin-top: 12px;
+}
+
+a.available-channel:hover,
+a.available-channel:focus {
+    color: var(--primary-active);
 }
 
 .stream-controls {
     width: 100%;
     display: flex;
     justify-content: space-between;
+}
+
+.stream-controls__left {
+    width: 200px;
+}
+
+.stream-controls__right {
+    width: 200px;
+    justify-content: flex-end;
+}
+
+.help-text {
+    color: var(--muted-text);
+}
+
+.channel-name {
+    line-height: 38px;
+    color: var(--primary-active);
 }

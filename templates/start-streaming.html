@@ -9,7 +9,15 @@
     <div class="row h-100">
         <div class="col p-0">
             {% if is_live %}
-                <span class="already-live">This stream is already LIVE</span>
+                <div class="alerady-live-container">
+                    <span class="already-live">This stream is already LIVE</span>
+                    <span class="help-text">But you can stream on one of available channels:</span>
+                    {% for stream in streams %}
+                        {% if not stream["isLive"] %}
+                            <a class="available-channel" href="/start-streaming/{{ stream['id'] }}">{{ stream["channelName"] }}</a>
+                        {% endif %}
+                    {% endfor %}
+                </div>
             {% endif %}
 
             <div class="webcam-video-container {{ 'd-none' if is_live }}">
@@ -18,15 +26,19 @@
                 </video>
 
                 <div class="stream-controls p-3">
-                    <button id="startStream" type="button" class="btn btn-primary-custom">
-                        Start Stream
-                    </button>
-        
-                    <button id="endStream" type="button" class="btn d-none btn-primary-custom">
-                        End Stream
-                    </button>
+                    <div class="stream-controls__left">
+                        <button id="startStream" type="button" class="btn btn-primary-custom">
+                            Start Stream
+                        </button>
+            
+                        <button id="endStream" type="button" class="btn d-none btn-primary-custom">
+                            End Stream
+                        </button>
+                    </div>
+
+                    <span id="channelName" class="channel-name">{{ channel_name }}</span>
                     
-                    <div class="view-count-outer me-3">
+                    <div class="stream-controls__right view-count-outer me-3">
                         <i class="fa-regular fa-eye"></i>
                         <span id="viewsCount">0</span>
                     </div>
@@ -35,13 +47,13 @@
         </div>
         {% include "chat.html" %}
     </div>
+    
+{% endblock %}
 
-    <script async src="https://docs.opencv.org/master/opencv.js" type="text/javascript"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/4.0.1/socket.io.js" integrity="sha512-q/dWJ3kcmjBLU4Qc47E4A9kTB4m3wuTY7vkFJDTZKjTs8jhyGQnaUrxa0Ytd0ssMZhbNua9hE+E7Qv1j+DyZwA==" crossorigin="anonymous"></script>
+{% block scripts %}
     <script src='{{ url_for("static", filename="js/helpers.js") }}'></script>
     <!-- <script src='{{ url_for("static", filename="js/stream/broadcast-sockets.js") }}'></script> -->
     <script src='{{ url_for("static", filename="js/stream/broadcast-webrtc.js") }}'></script>
-    
+
     <script src='{{ url_for("static", filename="js/chat.js") }}'></script>
-    
 {% endblock %}

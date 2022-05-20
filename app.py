@@ -73,5 +73,5 @@ def start_streaming(stream_id):
 
 
 if __name__ == '__main__':
-    socketio.run(app, port=9000, host="192.168.18.87", debug=True)
+    socketio.run(app, port=9000, host="0.0.0.0", debug=True)
     # socketio.run(app, debug=True)

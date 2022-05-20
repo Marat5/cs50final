@@ -8,6 +8,7 @@ from __main__ import socketio
 def on_join(data):
     join_room(data["stream_id"])
 
+# Chat message handler
 @socketio.on('message')
 def handle_message(data):
     stream = get_stream_by_id(data["stream_id"])

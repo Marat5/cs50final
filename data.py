@@ -1,8 +1,8 @@
 stream_list = [
     {
         "id": 1,
-        "name": "First Stream", 
-        "description": "Some kind of stream description",
+        "name": "FNCS Finals", 
+        "description": "Are we about to win fncs?",
         "img": None,
         "game": "Fortnite",
         "messages": [], # Each message should be a dict with sender, text, sender_color and stream_id
@@ -15,8 +15,8 @@ stream_list = [
     },
     {
         "id": 2,
-        "name": "Second Stream", 
-        "description": "Some kind of stream description", 
+        "name": "Duos with subs", 
+        "description": "Just playing with subscribers", 
         "img": None,
         "game": "Fortnite",
         "messages": [],
@@ -29,8 +29,8 @@ stream_list = [
     },
     {
         "id": 3,
-        "name": "Third Stream", 
-        "description": "Some kind of stream description", 
+        "name": "Practicing for World Cup", 
+        "description": "Editing walls in creative faster than anyone else", 
         "img": None,
         "game": "Fortnite",
         "messages": [],
@@ -43,8 +43,8 @@ stream_list = [
     },
     {
         "id": 4,
-        "name": "Fun Stuff", 
-        "description": "Some kind of stream description", 
+        "name": "Long Shot Challenge", 
+        "description": "Only shooting from 200m", 
         "img": None,
         "game": "Fortnite",
         "messages": [],
@@ -57,8 +57,8 @@ stream_list = [
     },
     {
         "id": 5,
-        "name": "Games", 
-        "description": "Some kind of stream description", 
+        "name": "Getting the dubs", 
+        "description": "20 win streak?!", 
         "img": None,
         "game": "Fortnite",
         "messages": [],
@@ -72,7 +72,7 @@ stream_list = [
     {
         "id": 6,
         "name": "Playing Around", 
-        "description": "Some kind of stream description", 
+        "description": "Playing some games", 
         "img": None,
         "game": "Fortnite",
         "messages": [],
@@ -85,8 +85,8 @@ stream_list = [
     },
     {
         "id": 7,
-        "name": "Late Night Stream", 
-        "description": "Some kind of stream description", 
+        "name": "Mystery stream", 
+        "description": "The mystery is slowly unwrapping", 
         "img": None,
         "game": "Fortnite",
         "messages": [],

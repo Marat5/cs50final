@@ -1,7 +1,7 @@
 # Video streaming platform
 
 ## Short description
-This is an app for streaming webcam video to multiple viewers. Viewers can communicate with streamer in chat. There are 7 rooms for streaming, they can be seen on sidebar (with live status and viewers count) and on the main page
+This is an app for streaming webcam video to multiple viewers. Viewers can communicate with streamer in chat. There are 7 rooms for streaming, you can find them on sidebar (with live status and viewers count) and on the main page
 ## Routes
 1. **"/"** - Index route, shows the main page with list of streams
 2. **"/stream/<stream_id>"** - Stream page that shows the stream if it's live and a message if it is not live. Stream chat is accessible from here
@@ -9,8 +9,8 @@ This is an app for streaming webcam video to multiple viewers. Viewers can commu
 
 ## How it works?
 The app is multi page, with Flask on backend and js without frameworks on client side.  
-Streaming works on WebRTC and uses python server as a signaling server, sending signals through websockets  
-Chat messages are sent through websockets and saved on server
+Streaming works on WebRTC and uses python server for signaling via websockets  
+Chat messages are also sent through websockets and saved on server
 
 ## How to run?
 pip install -r requirements.txt  
@@ -26,4 +26,4 @@ How watcher sees the stream:
 
 ## What can go wrong?
 The app will let you stream on http (not secure) in your local network only if you set chrome://flags/#unsafely-treat-insecure-origin-as-secure to treat requests to your origin (example: http://192.168.18.87:9000) as secure  
-But you can watch streams without that or just use localhost (uncomment last line in app.py)
+But you can **watch** streams without that or just use localhost (uncomment last line in app.py)

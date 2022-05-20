@@ -11,7 +11,7 @@ const startStream = async () => {
     }
 
     try {
-        stream = await navigator.mediaDevices.getUserMedia({ video: true });
+        stream = await navigator.mediaDevices.getUserMedia({ video: { width: 320, height: 180 }});
         recorder = new MediaRecorder(stream, {mimeType: 'video/webm; codecs="vp8"', videoBitsPerSecond: 10000000});
         webcamVideo.srcObject = stream;
 

@@ -8,13 +8,13 @@ document.addEventListener('DOMContentLoaded', function() {
 });
 
 // Fix 100vh problem in mobile safari
-const appHeight = () => {
+const setCSSAppHeight = () => {
     const doc = document.documentElement
     doc.style.setProperty('--app-height', `${window.innerHeight}px`)
 }
 
-window.addEventListener('resize', appHeight);
-appHeight();
+window.addEventListener('resize', setCSSAppHeight);
+setCSSAppHeight();
 
 socket.on("broadcaster", (streamId) => {
     const liveCircle = document.querySelector(`#liveCircle-${streamId}`);

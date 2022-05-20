@@ -25,6 +25,10 @@ const viewsCountElem = document.querySelector("#viewsCount");
 
 let stream;
 const startStream = async () => {
+    if (!navigator.mediaDevices?.getUserMedia) {
+        return;
+    }
+
     try {
         stream = await navigator.mediaDevices.getUserMedia({ video: { width: 320, height: 180 }, audio: true });
         webcamVideo.srcObject = stream;

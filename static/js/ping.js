@@ -23,7 +23,7 @@ async function* fetchWrodsFromPingPages() {
     }
 }
 
-const setButtonSuccess = (isSuccess) => {
+const handleFetchResult = (isSuccess) => {
     checkApiButton.classList.remove("btn-primary-custom");
     checkApiButton.classList.add(`btn-${isSuccess ? 'success' : 'danger'}`);
     checkApiButton.setAttribute("disabled", true)
@@ -58,9 +58,9 @@ const checkApi = async () => {
         for await (const displayWord of fetchWrodsFromPingPages()) {
             addWordWhileLoading(displayWord);
         }
-        setButtonSuccess(true);
+        handleFetchResult(true);
     } catch {
-        setButtonSuccess(false);
+        handleFetchResult(false);
     } finally {
         checkApiButton.removeEventListener("click", checkApi);
         setTimeout(() => {

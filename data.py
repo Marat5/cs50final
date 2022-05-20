@@ -102,3 +102,8 @@ stream_list = [
 recommended_streams = list(filter(lambda x: x["isRecommended"], stream_list))
 
 streams_from_followed_channels = list(filter(lambda x: x["isFollowed"], stream_list))
+
+# Session id is key, displayed number is value
+chat_users = {}
+
+ping_words = ["Async", "generator", "is", "fetching", "paginated", "data"]

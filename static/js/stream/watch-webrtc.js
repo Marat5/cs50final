@@ -1,21 +1,13 @@
-const config = {
-  iceServers: [
-    {
-      urls: ["stun:stun.l.google.com:19302"]
-    }
-  ]
-};
-let peerConnection;
-
 const streamId = Number(location.pathname.split("/").pop());
 
 const streamElem = document.querySelector('#stream');
 const streamNotLiveElem = document.querySelector("#stream-not-live");
 const viewsCountElem = document.querySelector("#viewsCount");
 
+let peerConnection;
 
 socket.on("offer", async (id, description) => {
-    peerConnection = new RTCPeerConnection(config);
+    peerConnection = new RTCPeerConnection();
 
     peerConnection.ontrack = event => {
         streamElem.srcObject = event.streams[0];

@@ -239,3 +239,14 @@ a {
 .view-count-outer i {
     margin-right: 4px;
 }
+
+.alert {
+    position: absolute;
+    overflow: hidden;
+    line-height: 40px;
+    height: 40px;
+    padding: 0 1rem;
+    margin-bottom: 0;
+    opacity: 0;
+    transition: opacity 600ms;
+}

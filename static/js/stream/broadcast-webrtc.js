@@ -1,8 +1,6 @@
 // In this file we handle communication with webrtc signaling server
 // And UI changes related to stream broadcasting
-const rtcPeerConnectionConfig = {
-    iceServers: [{ urls: ["stun:stun.l.google.com:19302"] }]
-};
+
 
 // Using proxy traps to trigger views count change when peerConnections are touched
 const peerConnections = new Proxy({}, {
@@ -26,6 +24,7 @@ const viewsCountElem = document.querySelector("#viewsCount");
 let stream;
 const startStream = async () => {
     if (!navigator.mediaDevices?.getUserMedia) {
+        showDangerAlert("Oops, we could not access data stream from your webcam. Check out the readme, it might help");
         return;
     }
 
@@ -38,7 +37,7 @@ const startStream = async () => {
         startSreamBtn.classList.add("d-none");
         endStreamBtn.classList.remove("d-none");
     } catch {
-        console.log("Something went wrong")
+        showDangerAlert("Oops, we got an error starting the stream. Check out the readme, it might help");
     }
 }
 
@@ -67,7 +66,7 @@ const onViewsCountChange = debounce(() => {
 });
 
 socket.on("watcher", async id => {
-    const peerConnection = new RTCPeerConnection(rtcPeerConnectionConfig);
+    const peerConnection = new RTCPeerConnection();
     peerConnections[id] = peerConnection;
 
     if (stream) {
